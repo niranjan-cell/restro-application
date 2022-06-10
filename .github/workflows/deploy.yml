@@ -6,7 +6,7 @@ on:
      - "main"
 
 env:
- AWS_REGION: ap-south-1
+ AWS_REGION: us-east-1
  ECS_SERVICE: app-service
  ECS_CLUSTER: restro
  CONTAINER_NAME: restro-app
