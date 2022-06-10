@@ -86,6 +86,10 @@ Creating a application load balancer and creating a target group  and adding tha
 > ### Moving for "GitHub Action"
 
 1. Creating the directory .github/workflows/
+    ```sh
+    mkdir -p .github/workflows/
+    cd .github/workflows/
+    ```
 2. vi deploy.yml
     ```yml
     name: Deploy to AWS ECS cluster
@@ -176,7 +180,28 @@ Creating a application load balancer and creating a target group  and adding tha
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always() # Pick up events even if the job fails or is canceled.
     ```
-```sh
-mkdir -p .github/workflows/
-cd .github/workflows/
-```
+
+  
+  3. Adding the secret to repository
+  ![secret](.ignore/addingsecreate.PNG)
+  
+  4. Creating Slack hook for slack notification.
+   ![slack](.ignore/addingsecreate2.PNG)
+   ![slack](.ignore/addingsecreate3.PNG)
+
+  5. After Commiting the code to main branch from branch Niranjan
+      ```git
+      git checkout -b niranjan
+      git add .
+      git commit -am "workflow commit"
+      ```
+      Mearging Changes in Github
+
+      ![slack](.ignore/addingsecreate6.PNG)
+
+  6. Results 
+      CI/CD working properly
+      ![slack](.ignore/addingsecreate7.PNG)
+      ![slack](.ignore/addingsecreate5.PNG)
+      
+> # Thank you 
