@@ -77,7 +77,7 @@ docker push niranjanchavan/restro-application
 Creating a application load balancer and creating a target group  and adding that to ECS service and changing the lsitening rule for application balancer
 ```
 ![Creating cluster5](.ignore/12.png)
-![Creating cluster6](.ignore/15.png)
+![Creating cluster7](.ignore/15.PNG)
 
 
 # :) Working 
