@@ -65,7 +65,7 @@ docker push niranjanchavan/restro-application
 ![Creating cluster](.ignore/5.PNG)
 ![Creating cluster](.ignore/6.PNG)
 ![Creating cluster](.ignore/7.PNG)
-![Creating cluster](.ignore/11.PNG)
+![Creating cluster](.ignore/11.png)
 
 > Creating a Service
 ![Creating cluster1](.ignore/8.PNG)
