@@ -1,0 +1,87 @@
+name: Deploy to AWS ECS cluster
+
+on:
+ push:
+   branches:
+     - "main"
+
+env:
+ AWS_REGION: ap-south-1
+ ECS_SERVICE: app-service
+ ECS_CLUSTER: restro
+ CONTAINER_NAME: restro-app
+
+jobs:
+  app_pipeline:
+    name: "Restro-Deploy"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "App Code Checkout"
+        uses: actions/checkout@v2
+      
+      - name: Setup of JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+    
+      - name: Build Application using Maven
+        run: mvn clean compile package
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Docker Build and push to DockerHub
+        uses: docker/build-push-action@v3
+        with:
+          context: ./
+          file: ./dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/restro-application:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/restro-application:${{ github.sha }}
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Download Amazon ECS task definition
+        run: | 
+         aws ecs describe-task-definition --task-definition restro-task --query taskDefinition > task-definition.json
+         cat task-definition.json
+
+      - name: Replace Docker image ID and create new Task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/restro-application:latest
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+      - name: Slack Notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: "The CI/CD Pipeline for Restro project executed successfully"
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+          channel: "ci-cd_pipeline"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.
