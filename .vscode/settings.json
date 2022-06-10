@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///c%3A/Learning/Training/assignment/projectwithDocker-githubaction-ecs/restro-application/.github/workflows/deploy.yml"
+    }
+}
