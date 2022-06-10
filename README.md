@@ -57,27 +57,27 @@ docker login
 docker push niranjanchavan/restro-application
 ```
 > Creating cluster
-![Creating cluster](1.PNG)
-![Creating cluster](2.PNG)
-![Creating cluster](3.PNG)
+![Creating cluster](.ignore/1.PNG)
+![Creating cluster](.ignore/2.PNG)
+![Creating cluster](.ignore/3.PNG)
 
 > Creating a Task
-![Creating cluster](5.PNG)
-![Creating cluster](6.PNG)
-![Creating cluster](7.PNG)
-![Creating cluster](11.PNG)
+![Creating cluster](.ignore/5.PNG)
+![Creating cluster](.ignore/6.PNG)
+![Creating cluster](.ignore/7.PNG)
+![Creating cluster](.ignore/11.PNG)
 
 > Creating a Service
-![Creating cluster](8.PNG)
-![Creating cluster](9.PNG)
-![Creating cluster](13.PNG)
-![Creating cluster](14.PNG)
+![Creating cluster](.ignore/8.PNG)
+![Creating cluster](.ignore/9.PNG)
+![Creating cluster](.ignore/13.PNG)
+![Creating cluster](.ignore/14.PNG)
 
 ```text
 Creating a application load balancer and creating a target group  and adding that to ECS service and changing the lsitening rule for application balancer
 ```
-![Creating cluster](12.PNG)
-![Creating cluster](15.PNG)
+![Creating cluster](.ignore/12.PNG)
+![Creating cluster](.ignore/15.PNG)
 
 
 # :) Working 
