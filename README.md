@@ -90,24 +90,24 @@ Creating a application load balancer and creating a target group  and adding tha
     ```yml
     name: Deploy to AWS ECS cluster
 
-on:
- push:
-   branches:
-     - "main"
+    on:
+     push:
+       branches:
+         - "main"
 
-env:
- AWS_REGION: ap-south-1
- ECS_SERVICE: app-service
- ECS_CLUSTER: restro
- CONTAINER_NAME: restro-app
+    env:
+     AWS_REGION: ap-south-1
+     ECS_SERVICE: app-service
+     ECS_CLUSTER: restro
+     CONTAINER_NAME: restro-app
 
-jobs:
-  app_pipeline:
-    name: "Restro-Deploy"
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "App Code Checkout"
-        uses: actions/checkout@v2
+    jobs:
+      app_pipeline:
+        name: "Restro-Deploy"
+        runs-on: "ubuntu-latest"
+        steps:
+          - name: "App Code Checkout"
+            uses: actions/checkout@v2
       
       - name: Setup of JDK 11
         uses: actions/setup-java@v3
