@@ -199,8 +199,10 @@ Creating a application load balancer and creating a target group  and adding tha
       Mearging Changes in Github
 
       ![slack](.ignore/addingsecreate6.PNG)
-
-  6. Results 
+      
+  6. Slack Notification
+    ![Slack Notification](.ignore/restrslack.PNG) 
+  8. Results 
       CI/CD working properly
       ![slack](.ignore/addingsecreate7.PNG)
       ![slack](.ignore/addingsecreate5.PNG)
